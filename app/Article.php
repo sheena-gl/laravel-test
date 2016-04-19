@@ -14,7 +14,7 @@ class Article extends Model
     	return mb_strtoupper($value);
     }
     public function setTitleAttribute($value){
-    	// 小文字に変換
+    	// 小文字に変換よ！
     	$this->attributes['title'] = mb_strtolower($value);
     }
 }
