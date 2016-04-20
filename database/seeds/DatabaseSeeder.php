@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
+use Faker\Factory as Faker;
+use Carbon\Carbon;
+use App\Article;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,12 +17,28 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-<<<<<<< HEAD
-        // $this->call(UsersTableSeeder::class);
-=======
     	Model::unguard();
+        $this->call('ArticlesTableSeeder');
         // $this->call(UsersTableSeeder::class);
         Model::reguard();
->>>>>>> 506b4db3afe005b606f798a994a9dddad3ea4ec6
     }
+}
+
+class ArticlesTableSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('articles')->delete();
+ 
+        $faker = Faker::create('ja_JP');
+ 
+        for ($i = 0; $i < 10; $i++) {
+            Article::create([
+                'title' => $faker->sentence(),
+                'body' => $faker->paragraph(),
+                'published_at' => Carbon::today()
+            ]);
+        }
+    }
+ 
 }
